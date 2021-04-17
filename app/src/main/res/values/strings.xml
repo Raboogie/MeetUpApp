@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Meet Up App</string>
+    <string name="register">Register</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="username">Username</string>
+    <string name="registration">Registration</string>
+    <string name="login">LOGIN</string>
+    <string name="login_now">LOGIN NOW</string>
+    <string name="register_now">REGISTER NOW</string>
+</resources>
