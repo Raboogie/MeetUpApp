@@ -6,9 +6,15 @@
     tools:context=".Fragments.UsersFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <!-- <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/users_fragment" />
+        android:text="@string/users_fragment" /> -->
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewUsers"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        />
 
 </FrameLayout>
