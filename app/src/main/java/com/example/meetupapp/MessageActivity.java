@@ -14,6 +14,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.meetupapp.Model.Users;
@@ -24,6 +25,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import java.util.HashMap;
 
 public class MessageActivity extends AppCompatActivity {
     TextView usernameMessageActivity;
@@ -44,19 +47,8 @@ public class MessageActivity extends AppCompatActivity {
 
         imageViewMessageActivity = findViewById(R.id.imageviewProfilePicture);
         usernameMessageActivity = findViewById(R.id.username);
-
-        //Toolbar setup
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        //setSupportActionBar(toolbar);
-        /*getSupportActionBar().setTitle("");
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);*/
-
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+        btnSend = findViewById(R.id.btn_send);
+        etMessage = findViewById(R.id.EditText_send);
 
         intent = getIntent();
         String userid = intent.getStringExtra("usersid");
@@ -84,5 +76,30 @@ public class MessageActivity extends AppCompatActivity {
 
             }
         });
+
+        btnSend.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String msg = etMessage.getText().toString();
+                if (!msg.equals("")) {
+                    sendMessage(firebaseUser.getUid(),userid,msg);
+                } else {
+                    Toast.makeText(MessageActivity.this, "Cannot Send an Empty Message",Toast.LENGTH_SHORT);
+                }
+
+                // after msg is sent, clear out the EditTest field
+                etMessage.setText("");
+            }
+        });
+    }
+
+    private void sendMessage(String sender, String receiver, String message) {
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
+
+        HashMap<String,Object> hashMap = new HashMap<>();
+        hashMap.put("sender",sender);
+        hashMap.put("receiver", receiver);
+        hashMap.put("message", message);
+        reference.child("Chats").push().setValue(hashMap);
     }
 }

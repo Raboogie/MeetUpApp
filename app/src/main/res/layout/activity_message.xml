@@ -36,7 +36,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewMessage"
         android:layout_width="match_parent"
-        android:layout_height="600dp" />
+        android:layout_height="550dp" />
 
     <RelativeLayout
         android:id="@+id/bottom"
@@ -46,20 +46,21 @@
         android:background="#fff" >
 
         <EditText
-            android:id="@+id/text_send"
+            android:id="@+id/EditText_send"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:hint="Type a Message..."
             android:layout_alignParentTop="true"
-            android:layout_toLeftOf="@+id/btn_send"
-            android:background="@android:color/transparent" />
+            android:layout_toStartOf="@+id/btn_send"
+            android:background="@android:color/transparent"
+            android:inputType="text"
+            android:importantForAutofill="no" />
 
         <ImageButton
             android:id="@+id/btn_send"
             android:layout_width="40dp"
             android:layout_height="50dp"
             android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
             android:background="@android:drawable/ic_menu_send" />
     </RelativeLayout>
 
