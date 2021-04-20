@@ -11,5 +11,7 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="users_fragment">Hello Users Fragment</string>
     <string name="chats_fragment">Hello Chats Fragment</string>
+    <string name="type_a_message">Type a Message...</string>
+    <string name="profile_pic">profile_pic</string>
 
 </resources>

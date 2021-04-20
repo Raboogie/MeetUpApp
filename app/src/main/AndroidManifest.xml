@@ -11,7 +11,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MeetUpApp">
-        <activity android:name=".MessageActivity"></activity>
+        <activity android:name=".MessageActivity"
+            android:theme="@style/Theme.MeetUpApp.NoActionBar"></activity>
         <activity android:name=".MainActivity" />
         <activity android:name=".RegisterActivity" />
         <activity android:name=".LoginActivity">

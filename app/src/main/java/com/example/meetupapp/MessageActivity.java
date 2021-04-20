@@ -2,16 +2,12 @@ package com.example.meetupapp;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.LinearLayoutCompat;
-import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
-import android.media.Image;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.AbsListView;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -48,7 +44,7 @@ public class MessageActivity extends AppCompatActivity {
 
     RecyclerView messageRecyclerView;
     MessageAdapter messageAdapter;
-    List<Chat> mchat;
+    List<Chat> myChat;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -123,21 +119,21 @@ public class MessageActivity extends AppCompatActivity {
     }
 
      private void readMessages(String myId, String userid, String imageurl) {
-        mchat = new ArrayList<>();
+        myChat = new ArrayList<>();
         myRef = FirebaseDatabase.getInstance().getReference("Chats");
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                mchat.clear();
+                myChat.clear();
                 for (DataSnapshot snaps : snapshot.getChildren()) {
                     Chat chat = snaps.getValue(Chat.class);
 
                     if (chat.getReceiver().equals(myId) && chat.getSender().equals(userid) ||
                             chat.getReceiver().equals(userid) && chat.getSender().equals(myId)) {
-                        mchat.add(chat);
+                        myChat.add(chat);
                     }
 
-                    messageAdapter = new MessageAdapter(MessageActivity.this, mchat, imageurl);
+                    messageAdapter = new MessageAdapter(MessageActivity.this, myChat, imageurl);
                     messageRecyclerView.setAdapter(messageAdapter);
                 }
             }

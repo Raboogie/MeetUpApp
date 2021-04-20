@@ -28,8 +28,6 @@
             android:textSize="18sp"
             android:textColor="@color/white"
             android:text="Hey, Im fine and you?"/>
-
-
     </RelativeLayout>
 
 </RelativeLayout>
