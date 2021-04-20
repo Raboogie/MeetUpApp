@@ -65,6 +65,7 @@ public class MainActivity extends AppCompatActivity {
         // Team #8 Add your Fragments to the Tab layout HERE.
         viewPagerAdapter.addFragment(new ChatsFragment(),"Chats");
         viewPagerAdapter.addFragment(new UsersFragment(),"Users");
+        viewPagerAdapter.addFragment(new chooseLocationFragment(), "Location");
         viewPager.setAdapter(viewPagerAdapter);
 
         tabLayout.setupWithViewPager(viewPager);
