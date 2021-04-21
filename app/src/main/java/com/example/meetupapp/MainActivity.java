@@ -17,6 +17,8 @@ import android.widget.TableLayout;
 import android.widget.Toast;
 
 import com.example.meetupapp.Fragments.ChatsFragment;
+import com.example.meetupapp.Fragments.ChooseLocationFragment;
+import com.example.meetupapp.Fragments.MapsFragment;
 import com.example.meetupapp.Fragments.UsersFragment;
 import com.example.meetupapp.Model.Users;
 import com.google.android.material.tabs.TabLayout;
@@ -65,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
         // Team #8 Add your Fragments to the Tab layout HERE.
         viewPagerAdapter.addFragment(new ChatsFragment(),"Chats");
         viewPagerAdapter.addFragment(new UsersFragment(),"Users");
-        viewPagerAdapter.addFragment(new chooseLocationFragment(), "Location");
+        viewPagerAdapter.addFragment(new ChooseLocationFragment(), "Location");
         viewPager.setAdapter(viewPagerAdapter);
 
         tabLayout.setupWithViewPager(viewPager);

@@ -8,15 +8,6 @@
     android:orientation="vertical"
     tools:context=".MainActivity" >
 
-    <fragment
-        android:id="@+id/chooseLocation"
-        android:name="com.example.meetupapp.chooseLocationFragment"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"></fragment>
-
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tabLayout"
         android:layout_width="match_parent"

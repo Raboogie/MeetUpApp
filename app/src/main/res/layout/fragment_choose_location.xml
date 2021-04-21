@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/chooseLocationFrame"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".chooseLocationFragment">
+    tools:context=".Fragments.ChooseLocationFragment">
 
     <!-- TODO: Update blank fragment layout -->
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -16,27 +18,110 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/chooseLocationTitle"
+                android:id="@+id/fragmentTitle"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_height="30dp"
                 android:layout_gravity="center"
                 android:layout_margin="10dp"
-                android:text="Meetup Scheduler"
-                android:textSize="20sp" />
+                android:text="@string/meetup_location_planner"
+                android:textColor="#120101"
+                android:textSize="22sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/locationTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:text="@string/location_address"
+                android:textColor="#120101"
+                android:textSize="15sp"
+                android:textStyle="bold" />
 
             <EditText
-                android:id="@+id/locationInput"
+                android:id="@+id/addressInput"
                 android:layout_width="match_parent"
-                android:layout_height="99dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:autofillHints=""
                 android:ems="10"
                 android:gravity="start|top"
+                android:hint="@string/type_here"
                 android:inputType="textMultiLine" />
 
             <Button
-                android:id="@+id/button"
+                android:id="@+id/searchButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Search" />
+                android:layout_margin="10dp"
+                android:text="@string/search" />
+
+            <TextView
+                android:id="@+id/dateTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:text="@string/set_date"
+                android:textColor="#120101"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/dateInput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:ems="10"
+                android:hint="@string/mm_dd_yyyy"
+                android:inputType="date" />
+
+            <TextView
+                android:id="@+id/timeTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:text="@string/set_time"
+                android:textColor="#120101"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/timeInput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:ems="10"
+                android:hint="@string/type_here"
+                android:inputType="time" />
+
+            <TextView
+                android:id="@+id/messageTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:text="@string/custom_message"
+                android:textColor="#120101"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/messageInput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:ems="10"
+                android:gravity="start|top"
+                android:hint="@string/type_here_optional"
+                android:inputType="textMultiLine" />
+
+            <Button
+                android:id="@+id/submitButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="10dp"
+                android:onClick="confirmMessage"
+                android:text="@string/confirm_meetup" />
 
         </LinearLayout>
     </ScrollView>
