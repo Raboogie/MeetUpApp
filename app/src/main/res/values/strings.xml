@@ -17,7 +17,6 @@
     <string name="logout_title">Logout</string>
     <string name="darkMode_title">Dark Mode</string>
     <string name="darkMode_summary">Turn dark mode on or off</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>
