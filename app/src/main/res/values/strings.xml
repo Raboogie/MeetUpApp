@@ -8,7 +8,6 @@
     <string name="login">LOGIN</string>
     <string name="login_now">LOGIN NOW</string>
     <string name="register_now">REGISTER NOW</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="users_fragment">Hello Users Fragment</string>
     <string name="chats_fragment">Hello Chats Fragment</string>
     <string name="type_a_message">Type a Message...</string>
