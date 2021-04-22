@@ -1,20 +1,20 @@
 package com.example.meetupapp;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.preference.PreferenceManager;
 import androidx.viewpager.widget.ViewPager;
-
-import android.content.Intent;
-import android.os.Bundle;
-import android.os.Trace;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.widget.TableLayout;
-import android.widget.Toast;
 
 import com.example.meetupapp.Fragments.ChatsFragment;
 import com.example.meetupapp.Fragments.UsersFragment;
@@ -63,11 +63,24 @@ public class MainActivity extends AppCompatActivity {
         ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
 
         // Team #8 Add your Fragments to the Tab layout HERE.
-        viewPagerAdapter.addFragment(new ChatsFragment(),"Chats");
-        viewPagerAdapter.addFragment(new UsersFragment(),"Users");
+        viewPagerAdapter.addFragment(new ChatsFragment(), "Chats");
+        viewPagerAdapter.addFragment(new UsersFragment(), "Users");
         viewPager.setAdapter(viewPagerAdapter);
 
         tabLayout.setupWithViewPager(viewPager);
+
+        PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
+        SharedPreferences sharedP = PreferenceManager.getDefaultSharedPreferences(this);
+        SharedPreferences.Editor prefEdit = sharedP.edit();
+        Boolean mode = sharedP.getBoolean(SettingsActivity.KEY_DARK_MODE, false);
+        if (mode) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+            prefEdit.putBoolean(SettingsActivity.KEY_DARK_MODE, true);
+        } else {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+            prefEdit.putBoolean(SettingsActivity.KEY_DARK_MODE, false);
+        }
+        prefEdit.apply();
     }
 
     @Override
@@ -83,8 +96,12 @@ public class MainActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.logout:
                 FirebaseAuth.getInstance().signOut();
-                startActivity(new Intent(this,LoginActivity.class));
+                startActivity(new Intent(this, LoginActivity.class));
                 finish();
+                return true;
+            case R.id.settings:
+                Intent intent = new Intent(this, SettingsActivity.class);
+                startActivity(intent);
                 return true;
         }
         return false;

@@ -13,5 +13,11 @@
     <string name="chats_fragment">Hello Chats Fragment</string>
     <string name="type_a_message">Type a Message...</string>
     <string name="profile_pic">profile_pic</string>
+    <string name="settings_title">Settings</string>
+    <string name="logout_title">Logout</string>
+    <string name="darkMode_title">Dark Mode</string>
+    <string name="darkMode_summary">Turn dark mode on or off</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>
