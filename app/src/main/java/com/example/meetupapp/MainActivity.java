@@ -10,15 +10,11 @@ import androidx.viewpager.widget.ViewPager;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Trace;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.TableLayout;
-import android.widget.Toast;
 
 import com.example.meetupapp.Fragments.ChatsFragment;
 import com.example.meetupapp.Fragments.ChooseLocationFragment;
-import com.example.meetupapp.Fragments.MapsFragment;
 import com.example.meetupapp.Fragments.UsersFragment;
 import com.example.meetupapp.Model.Users;
 import com.google.android.material.tabs.TabLayout;

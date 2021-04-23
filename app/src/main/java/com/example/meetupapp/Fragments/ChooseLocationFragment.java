@@ -1,7 +1,9 @@
 package com.example.meetupapp.Fragments;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AlertDialog;
@@ -17,7 +19,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.meetupapp.LoginActivity;
+import com.example.meetupapp.MapActivity;
 import com.example.meetupapp.R;
+
+import java.util.Map;
 
 import static android.Manifest.permission.CALL_PHONE;
 
@@ -42,7 +48,9 @@ public class ChooseLocationFragment extends Fragment implements View.OnClickList
     private EditText time;
     private EditText message;
     private Button confirmButton;
+    private Button searchButton;
     private Context context;
+    public final int MAP_REQUEST = 1;
 
     public ChooseLocationFragment() {
         // Required empty public constructor
@@ -86,13 +94,27 @@ public class ChooseLocationFragment extends Fragment implements View.OnClickList
         message = view.findViewById(R.id.messageInput);
         confirmButton = view.findViewById(R.id.submitButton);
         confirmButton.setOnClickListener(this);
+        searchButton = view.findViewById(R.id.searchButton);
+        searchButton.setOnClickListener(this);
         return view;
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if(requestCode == MAP_REQUEST && resultCode == Activity.RESULT_OK){
+            location.setText(data.getStringExtra("location"));
+        }
+
     }
 
 
     @Override
     public void onClick(View v) {
+
         switch (v.getId()) {
+            //Code for submit button
             case R.id.submitButton:
                 //Let the user know they didn't fill out enough if one of the required fields are empty
                 if( (location.getText().toString().matches("")) || (date.getText().toString().matches("")) || (time.getText().toString().matches(""))){
@@ -129,7 +151,8 @@ public class ChooseLocationFragment extends Fragment implements View.OnClickList
                 break;
 
             case R.id.searchButton:
-
+                //Start map activity with the intent of getting a result which is the location
+                startActivityForResult(new Intent(getContext(), MapActivity.class), MAP_REQUEST);
                 break;
 
         }

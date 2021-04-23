@@ -25,5 +25,8 @@
     <string name="set_time">Set Time</string>
     <string name="custom_message">Custom Message</string>
     <string name="confirm_meetup">Confirm Meetup</string>
+    <string name="search_location">Search Location...</string>
+    <string name="choose_a_location">Choose A Location</string>
+    <string name="confirm_location">Confirm Location</string>
 
 </resources>
