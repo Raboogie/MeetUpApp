@@ -7,10 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AlertDialog;
-import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,20 +16,15 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.meetupapp.LoginActivity;
 import com.example.meetupapp.MapActivity;
 import com.example.meetupapp.R;
 
-import java.util.Map;
-
-import static android.Manifest.permission.CALL_PHONE;
-
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link ChooseLocationFragment#newInstance} factory method to
+ * Use the {@link MeetUpPlanFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class ChooseLocationFragment extends Fragment implements View.OnClickListener {
+public class MeetUpPlanFragment extends Fragment implements View.OnClickListener {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -52,7 +44,7 @@ public class ChooseLocationFragment extends Fragment implements View.OnClickList
     private Context context;
     public final int MAP_REQUEST = 1;
 
-    public ChooseLocationFragment() {
+    public MeetUpPlanFragment() {
         // Required empty public constructor
     }
 
@@ -65,8 +57,8 @@ public class ChooseLocationFragment extends Fragment implements View.OnClickList
      * @return A new instance of fragment ChooseLocationFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static ChooseLocationFragment newInstance(String param1, String param2) {
-        ChooseLocationFragment fragment = new ChooseLocationFragment();
+    public static MeetUpPlanFragment newInstance(String param1, String param2) {
+        MeetUpPlanFragment fragment = new MeetUpPlanFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -87,7 +79,7 @@ public class ChooseLocationFragment extends Fragment implements View.OnClickList
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_choose_location, container, false);
+        View view = inflater.inflate(R.layout.fragment_meetup_plan, container, false);
         location = view.findViewById(R.id.addressInput);
         date = view.findViewById(R.id.dateInput);
         time = view.findViewById(R.id.timeInput);
@@ -116,6 +108,7 @@ public class ChooseLocationFragment extends Fragment implements View.OnClickList
         switch (v.getId()) {
             //Code for submit button
             case R.id.submitButton:
+                String meetUpPlan = "";
                 //Let the user know they didn't fill out enough if one of the required fields are empty
                 if( (location.getText().toString().matches("")) || (date.getText().toString().matches("")) || (time.getText().toString().matches(""))){
                     Toast warningMessage = Toast.makeText(this.getContext(), "Please fill out all the required fields before confirming", Toast.LENGTH_LONG);
@@ -123,7 +116,7 @@ public class ChooseLocationFragment extends Fragment implements View.OnClickList
                 } else {
                     //Bring up an alert dialog so the user can verify the meetUp plan is
 
-                    String meetUpPlan = "Location: " + location.getText().toString() +
+                    meetUpPlan = "Location: " + location.getText().toString() +
                             "\nTime: " + time.getText().toString() +
                             "\nDate: " + date.getText().toString();
 
@@ -132,12 +125,14 @@ public class ChooseLocationFragment extends Fragment implements View.OnClickList
                         meetUpPlan += "\nMessage: " + message.getText().toString();
                     }
 
+                    String finalizedPlan = meetUpPlan;
                     new AlertDialog.Builder(getContext())
                             .setTitle("Verify The Information")
                             .setMessage("Is this information correct? \n\n" + meetUpPlan)
                             .setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
+                                    sendMeetUpPlanToChat(finalizedPlan);
                                     dialog.dismiss();
                                 }
                             })
@@ -156,5 +151,10 @@ public class ChooseLocationFragment extends Fragment implements View.OnClickList
                 break;
 
         }
+    }
+
+    public void sendMeetUpPlanToChat(String plan){
+        Intent goToChat = new Intent(getActivity(), ChatsFragment.class);
+        goToChat.putExtra("meetupInfo", plan);
     }
 }

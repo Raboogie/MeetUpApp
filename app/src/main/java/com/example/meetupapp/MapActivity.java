@@ -3,28 +3,18 @@ package com.example.meetupapp;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
 
-import android.Manifest;
-import android.app.Activity;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.location.Address;
-import android.location.Criteria;
 import android.location.Geocoder;
-import android.location.Location;
-import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.PersistableBundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
-import com.example.meetupapp.Fragments.ChooseLocationFragment;
+import com.example.meetupapp.Fragments.MeetUpPlanFragment;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
@@ -106,7 +96,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             //Send the information back to the activity
-                            Intent goBackToFragment = new Intent(getApplicationContext(), ChooseLocationFragment.class);
+                            Intent goBackToFragment = new Intent(getApplicationContext(), MeetUpPlanFragment.class);
                             goBackToFragment.putExtra("location", location);
                             setResult(RESULT_OK,goBackToFragment);
                             finish();
