@@ -2,13 +2,29 @@ package com.example.meetupapp.Fragments;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.meetupapp.Adapter.UserAdapter;
+import com.example.meetupapp.Model.ChatList;
+import com.example.meetupapp.Model.Users;
 import com.example.meetupapp.R;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -16,6 +32,14 @@ import com.example.meetupapp.R;
  * create an instance of this fragment.
  */
 public class ChatsFragment extends Fragment {
+    private UserAdapter userAdapter;
+    private List<Users> myUsers;
+
+    FirebaseUser firebaseUser;
+    DatabaseReference databaseReference;
+
+    private List<ChatList> usersList;
+    RecyclerView recyclerView;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -61,6 +85,67 @@ public class ChatsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_chats, container, false);
+        View view = inflater.inflate(R.layout.fragment_chats, container, false);
+
+        recyclerView = view.findViewById(R.id.recyclerViewChat);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
+        firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+
+        usersList = new ArrayList<>();
+
+        databaseReference = FirebaseDatabase.getInstance().getReference("ChatList").child(firebaseUser.getUid());
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                 usersList.clear();
+
+                 // loop through all the users
+                for (DataSnapshot snap : snapshot.getChildren()) {
+                    ChatList chatList = snap.getValue(ChatList.class);
+                    usersList.add(chatList);
+                }
+
+                chatsList();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+        return view;
+    }
+
+    // gets all the users that you have recently text
+    private void chatsList() {
+        myUsers = new ArrayList<>();
+        databaseReference = FirebaseDatabase.getInstance().getReference("MyUsers");
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                myUsers.clear();
+
+                for (DataSnapshot snap : snapshot.getChildren()) {
+                    Users user = snap.getValue(Users.class);
+
+                    for (ChatList chatList : usersList) {
+                        if (user.getId().equals(chatList.getId())) {
+                            myUsers.add(user);
+                        }
+                    }
+                }
+
+                userAdapter = new UserAdapter(getContext(), myUsers);
+                recyclerView.setAdapter(userAdapter);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 }
