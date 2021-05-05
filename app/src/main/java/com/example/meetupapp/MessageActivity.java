@@ -41,6 +41,7 @@ public class MessageActivity extends AppCompatActivity {
     FirebaseUser firebaseUser;
     DatabaseReference myRef;
     Intent intent;
+    String userid;
 
     RecyclerView messageRecyclerView;
     MessageAdapter messageAdapter;
@@ -64,7 +65,7 @@ public class MessageActivity extends AppCompatActivity {
         messageRecyclerView.setLayoutManager(linearLayoutManager);
 
         intent = getIntent();
-        String userid = intent.getStringExtra("usersid");
+        userid = intent.getStringExtra("usersid");
 
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         myRef = FirebaseDatabase.getInstance().getReference("MyUsers").child(userid);
@@ -116,6 +117,28 @@ public class MessageActivity extends AppCompatActivity {
         hashMap.put("receiver", receiver);
         hashMap.put("message", message);
         reference.child("Chats").push().setValue(hashMap);
+
+        // Adds the latest messages between the user to the chat fragment.
+        final DatabaseReference chatReference = FirebaseDatabase.getInstance()
+                .getReference("ChatList")
+                .child(firebaseUser.getUid())
+                .child(userid);
+
+        chatReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (!snapshot.exists()) {
+                    chatReference.child("id").setValue(userid);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+
     }
 
      private void readMessages(String myId, String userid, String imageurl) {
