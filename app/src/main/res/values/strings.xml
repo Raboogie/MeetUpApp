@@ -28,5 +28,8 @@
     <string name="search_location">Search Location...</string>
     <string name="choose_a_location">Choose A Location</string>
     <string name="confirm_location">Confirm Location</string>
+    <string name="type_a_message">Type a Message...</string>
+    <string name="profile_pic">profile_pic</string>
+    <string name="select_a_user">Select A User</string>
 
 </resources>

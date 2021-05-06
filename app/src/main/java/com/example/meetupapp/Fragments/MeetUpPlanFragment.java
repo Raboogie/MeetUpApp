@@ -6,9 +6,11 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,7 +19,13 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.meetupapp.MapActivity;
+import com.example.meetupapp.MessageActivity;
 import com.example.meetupapp.R;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -43,6 +51,9 @@ public class MeetUpPlanFragment extends Fragment implements View.OnClickListener
     private Button searchButton;
     private Context context;
     public final int MAP_REQUEST = 1;
+
+    //Getting the database
+    DatabaseReference myRef;
 
     public MeetUpPlanFragment() {
         // Required empty public constructor
@@ -88,6 +99,28 @@ public class MeetUpPlanFragment extends Fragment implements View.OnClickListener
         confirmButton.setOnClickListener(this);
         searchButton = view.findViewById(R.id.searchButton);
         searchButton.setOnClickListener(this);
+
+        //Getting the user information from the database
+        myRef = FirebaseDatabase.getInstance().getReference("MyUsers");
+
+        myRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                // get all the usernames from the database and puts it into String k
+                if (snapshot.getValue() != null) {
+                    for (DataSnapshot snap : snapshot.getChildren()) {
+                        String k = "" + snap.child("username").getValue();
+                        Log.v("test","" + k);
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
         return view;
     }
 
@@ -154,7 +187,9 @@ public class MeetUpPlanFragment extends Fragment implements View.OnClickListener
     }
 
     public void sendMeetUpPlanToChat(String plan){
-        Intent goToChat = new Intent(getActivity(), ChatsFragment.class);
+        Intent goToChat = new Intent(getActivity(), MessageActivity.class);
         goToChat.putExtra("meetupInfo", plan);
+        goToChat.putExtra("usersid", "duvivierb");
+        startActivity(goToChat);
     }
 }
