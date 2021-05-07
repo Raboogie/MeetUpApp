@@ -39,9 +39,12 @@
                 android:textStyle="bold"/>
 
             <Spinner
-                android:id="@+id/selectUser"
+                android:id="@+id/selectUserSpinner"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="30dp"
+                android:background="#E3E3E3"
+                android:textAlignment="center"
+                android:layout_margin="10dp"/>
 
             <TextView
                 android:id="@+id/locationTitle"
@@ -135,7 +138,6 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_margin="10dp"
-                android:onClick="confirmMessage"
                 android:text="@string/confirm_meetup" />
 
         </LinearLayout>

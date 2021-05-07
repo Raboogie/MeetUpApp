@@ -12,10 +12,14 @@ import androidx.fragment.app.Fragment;
 
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.meetupapp.MapActivity;
@@ -27,12 +31,15 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link MeetUpPlanFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class MeetUpPlanFragment extends Fragment implements View.OnClickListener {
+public class MeetUpPlanFragment extends Fragment implements View.OnClickListener, AdapterView.OnItemSelectedListener {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -41,6 +48,7 @@ public class MeetUpPlanFragment extends Fragment implements View.OnClickListener
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    private String item;
 
     //Initialized variables
     private EditText location;
@@ -49,7 +57,7 @@ public class MeetUpPlanFragment extends Fragment implements View.OnClickListener
     private EditText message;
     private Button confirmButton;
     private Button searchButton;
-    private Context context;
+    private Spinner userNameSelect;
     public final int MAP_REQUEST = 1;
 
     //Getting the database
@@ -90,6 +98,8 @@ public class MeetUpPlanFragment extends Fragment implements View.OnClickListener
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        List<String> userNameList = new ArrayList<>();
+
         View view = inflater.inflate(R.layout.fragment_meetup_plan, container, false);
         location = view.findViewById(R.id.addressInput);
         date = view.findViewById(R.id.dateInput);
@@ -100,6 +110,7 @@ public class MeetUpPlanFragment extends Fragment implements View.OnClickListener
         searchButton = view.findViewById(R.id.searchButton);
         searchButton.setOnClickListener(this);
 
+
         //Getting the user information from the database
         myRef = FirebaseDatabase.getInstance().getReference("MyUsers");
 
@@ -109,20 +120,34 @@ public class MeetUpPlanFragment extends Fragment implements View.OnClickListener
                 // get all the usernames from the database and puts it into String k
                 if (snapshot.getValue() != null) {
                     for (DataSnapshot snap : snapshot.getChildren()) {
+                        //Populating arraylist with usernames
                         String k = "" + snap.child("username").getValue();
-                        Log.v("test","" + k);
+                        userNameList.add(k);
+                        //Log.v("test","" + k);
                     }
+                    Log.v("List", userNameList.toString());
                 }
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
             }
         });
 
+        //Setting up spinner so the user can select a username - populated with userNameList
+        //Find code for when something is selected on the spinner all the way to the bottom.
+        userNameSelect = view.findViewById(R.id.selectUserSpinner);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this.getActivity(), android.R.layout.simple_spinner_dropdown_item, userNameList);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        userNameSelect.setAdapter(adapter);
+        userNameSelect.setOnItemSelectedListener(this);
+
+
         return view;
     }
+
+
+
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -144,7 +169,7 @@ public class MeetUpPlanFragment extends Fragment implements View.OnClickListener
                 String meetUpPlan = "";
                 //Let the user know they didn't fill out enough if one of the required fields are empty
                 if( (location.getText().toString().matches("")) || (date.getText().toString().matches("")) || (time.getText().toString().matches(""))){
-                    Toast warningMessage = Toast.makeText(this.getContext(), "Please fill out all the required fields before confirming", Toast.LENGTH_LONG);
+                    Toast warningMessage = Toast.makeText(this.getContext(), "Please fill out all the required fields before confirming. User is " + item, Toast.LENGTH_LONG);
                     warningMessage.show();
                 } else {
                     //Bring up an alert dialog so the user can verify the meetUp plan is
@@ -191,5 +216,17 @@ public class MeetUpPlanFragment extends Fragment implements View.OnClickListener
         goToChat.putExtra("meetupInfo", plan);
         goToChat.putExtra("usersid", "duvivierb");
         startActivity(goToChat);
+    }
+
+    //SELECTING SOMETHING FROM THE SPINNER - SELECTING A USERNAME
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        //Not working sadly...
+        Log.d("HELLO", "You selected something!");
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
     }
 }

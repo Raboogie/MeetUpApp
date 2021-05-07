@@ -31,5 +31,6 @@
     <string name="type_a_message">Type a Message...</string>
     <string name="profile_pic">profile_pic</string>
     <string name="select_a_user">Select A User</string>
+    <string name="who_are_you_meeting">Who Are You Meeting?</string>
 
 </resources>
