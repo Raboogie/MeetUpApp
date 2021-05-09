@@ -1,6 +1,8 @@
 package com.example.meetupapp.Fragments;
 
 import android.app.Activity;
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -39,7 +41,7 @@ import java.util.List;
  * Use the {@link MeetUpPlanFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class MeetUpPlanFragment extends Fragment implements View.OnClickListener, AdapterView.OnItemSelectedListener {
+public class MeetUpPlanFragment extends Fragment implements View.OnClickListener {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -109,40 +111,6 @@ public class MeetUpPlanFragment extends Fragment implements View.OnClickListener
         confirmButton.setOnClickListener(this);
         searchButton = view.findViewById(R.id.searchButton);
         searchButton.setOnClickListener(this);
-
-
-        //Getting the user information from the database
-        myRef = FirebaseDatabase.getInstance().getReference("MyUsers");
-
-        myRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                // get all the usernames from the database and puts it into String k
-                if (snapshot.getValue() != null) {
-                    for (DataSnapshot snap : snapshot.getChildren()) {
-                        //Populating arraylist with usernames
-                        String k = "" + snap.child("username").getValue();
-                        userNameList.add(k);
-                        //Log.v("test","" + k);
-                    }
-                    Log.v("List", userNameList.toString());
-                }
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-
-        //Setting up spinner so the user can select a username - populated with userNameList
-        //Find code for when something is selected on the spinner all the way to the bottom.
-        userNameSelect = view.findViewById(R.id.selectUserSpinner);
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this.getActivity(), android.R.layout.simple_spinner_dropdown_item, userNameList);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        userNameSelect.setAdapter(adapter);
-        userNameSelect.setOnItemSelectedListener(this);
-
-
         return view;
     }
 
@@ -212,21 +180,12 @@ public class MeetUpPlanFragment extends Fragment implements View.OnClickListener
     }
 
     public void sendMeetUpPlanToChat(String plan){
-        Intent goToChat = new Intent(getActivity(), MessageActivity.class);
-        goToChat.putExtra("meetupInfo", plan);
-        goToChat.putExtra("usersid", "duvivierb");
-        startActivity(goToChat);
-    }
-
-    //SELECTING SOMETHING FROM THE SPINNER - SELECTING A USERNAME
-    @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        //Not working sadly...
-        Log.d("HELLO", "You selected something!");
-    }
-
-    @Override
-    public void onNothingSelected(AdapterView<?> parent) {
-
+        ClipboardManager clipboard = (ClipboardManager)getActivity().getSystemService(Context.CLIPBOARD_SERVICE);
+        // Creates a new text clip to put on the clipboard
+        ClipData clip = ClipData.newPlainText("simple text", plan);
+        clipboard.setPrimaryClip(clip);
+        //Alerting the user that the information has been copied
+        Toast infoCopied = Toast.makeText(this.getContext(), "MeetUp information copied to clipboard",Toast.LENGTH_LONG);
+        infoCopied.show();
     }
 }
