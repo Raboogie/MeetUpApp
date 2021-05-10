@@ -2,9 +2,12 @@ package com.example.meetupapp;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -29,6 +32,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
     FirebaseUser firebaseUser;
@@ -81,6 +85,16 @@ public class MainActivity extends AppCompatActivity {
             prefEdit.putBoolean(SettingsActivity.KEY_DARK_MODE, false);
         }
         prefEdit.apply();
+        String lang = sharedP.getString(SettingsActivity.LANG_KEY, "");
+        Configuration config = new Configuration(this.getResources().getConfiguration());
+
+        if (lang.equals("es")) {
+            config.setLocale(new Locale("es"));
+        } else {
+            config.setLocale(Locale.ENGLISH);
+        }
+        this.getResources().updateConfiguration(config, this.getResources().getDisplayMetrics());
+        //changeLanguage(this.getResources(), lang);
     }
 
     @Override

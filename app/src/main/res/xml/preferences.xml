@@ -5,6 +5,14 @@
         android:defaultValue="false"
         android:key="darkMode_preference"
         android:summary="@string/darkMode_summary"
-        android:title="@string/darkMode_title"
-        android:background="#221515" />
+        android:title="@string/darkMode_title" />
+
+    <ListPreference
+        android:key="Language"
+        android:defaultValue="English"
+        android:entries="@array/language_entries"
+        android:entryValues="@array/language_values"
+        android:title="@string/language_pref"
+        android:background="@drawable/greybg"
+        android:summary="@string/lang_pref_summary" />
 </PreferenceScreen>

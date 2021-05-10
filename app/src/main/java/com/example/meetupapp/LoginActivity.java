@@ -2,6 +2,7 @@ package com.example.meetupapp;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -17,9 +18,12 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import java.util.Calendar;
+
 public class LoginActivity extends AppCompatActivity {
     EditText etUserLogin, etPasswordLogin;
     Button loginBtn, registerNowBtn;
+    View login_activity;
 
     FirebaseAuth auth;
     FirebaseUser firebaseUser;
@@ -29,6 +33,7 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        login_activity = findViewById(R.id.loginAct);
         etUserLogin = findViewById(R.id.userLoginEditText);
         etPasswordLogin = findViewById(R.id.passwordLoginEditText);
         loginBtn = findViewById(R.id.loginBtn);
@@ -81,5 +86,13 @@ public class LoginActivity extends AppCompatActivity {
                 }
             }
         });
+
+        Calendar c = Calendar.getInstance();
+        int time = c.get(Calendar.HOUR_OF_DAY);
+        if (time >= 0 && time < 16) {
+            login_activity.setBackground(ContextCompat.getDrawable(this, R.drawable.daywp1));
+        } else if (time >= 16 && time < 24) {
+            login_activity.setBackground(ContextCompat.getDrawable(this, R.drawable.nightex));
+        }
     }
 }
