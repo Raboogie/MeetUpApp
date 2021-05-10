@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.example.meetupapp.Fragments.CallFragment;
 import com.example.meetupapp.Fragments.ChatsFragment;
 import com.example.meetupapp.Fragments.MeetUpPlanFragment;
 import com.example.meetupapp.Fragments.UsersFragment;
@@ -64,6 +65,7 @@ public class MainActivity extends AppCompatActivity {
         viewPagerAdapter.addFragment(new ChatsFragment(),"Chats");
         viewPagerAdapter.addFragment(new UsersFragment(),"Users");
         viewPagerAdapter.addFragment(new MeetUpPlanFragment(), "Location");
+        viewPagerAdapter.addFragment(new CallFragment(),"Call");
         viewPager.setAdapter(viewPagerAdapter);
 
         tabLayout.setupWithViewPager(viewPager);
