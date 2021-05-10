@@ -1,14 +1,5 @@
 package com.example.meetupapp;
 
-import android.content.Intent;
-import android.content.SharedPreferences;
-import android.content.res.Configuration;
-import android.content.res.Resources;
-import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,9 +8,23 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.preference.PreferenceManager;
+
+import android.content.SharedPreferences;
+import android.content.res.Configuration;
+import android.content.res.Resources;
+
 import androidx.viewpager.widget.ViewPager;
 
+import android.content.Intent;
+import android.os.Bundle;
+import android.os.Trace;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.widget.TableLayout;
+import android.widget.Toast;
+
 import com.example.meetupapp.Fragments.ChatsFragment;
+import com.example.meetupapp.Fragments.MeetUpPlanFragment;
 import com.example.meetupapp.Fragments.UsersFragment;
 import com.example.meetupapp.Model.Users;
 import com.google.android.material.tabs.TabLayout;
@@ -69,6 +74,7 @@ public class MainActivity extends AppCompatActivity {
         // Team #8 Add your Fragments to the Tab layout HERE.
         viewPagerAdapter.addFragment(new ChatsFragment(), "Chats");
         viewPagerAdapter.addFragment(new UsersFragment(), "Users");
+        viewPagerAdapter.addFragment(new MeetUpPlanFragment(), "Location");
         viewPager.setAdapter(viewPagerAdapter);
 
         tabLayout.setupWithViewPager(viewPager);

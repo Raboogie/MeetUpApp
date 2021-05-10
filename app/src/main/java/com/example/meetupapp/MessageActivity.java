@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -41,11 +42,12 @@ public class MessageActivity extends AppCompatActivity {
     FirebaseUser firebaseUser;
     DatabaseReference myRef;
     Intent intent;
-    String userid;
+    public String userid;
 
     RecyclerView messageRecyclerView;
     MessageAdapter messageAdapter;
     List<Chat> myChat;
+    String location;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,11 +72,30 @@ public class MessageActivity extends AppCompatActivity {
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         myRef = FirebaseDatabase.getInstance().getReference("MyUsers").child(userid);
 
+        /*
+        if (intent.hasExtra("meetupInfo")){
+            imageViewMessageActivity.setImageResource(R.mipmap.ic_launcher);
+            location = intent.getStringExtra("meetupInfo");
+            etMessage.setText(location);
+            //sendMessage(firebaseUser.getUid(),"duvivierbri",location);
+        }
+
+         */
+
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 Users user = snapshot.getValue(Users.class);
                 usernameMessageActivity.setText(user.getUsername());
+
+                /*
+                if (intent.hasExtra("meetupInfo")){
+                    imageViewMessageActivity.setImageResource(R.mipmap.ic_launcher);
+                    location = intent.getStringExtra("meetupInfo");
+                    etMessage.setText(location);
+                    sendMessage(firebaseUser.getUid(),"duvivierbri",location);
+                }
+                 */
 
                 if (user.getImageURL().equals("default")) {
                     imageViewMessageActivity.setImageResource(R.mipmap.ic_launcher);
@@ -85,6 +106,14 @@ public class MessageActivity extends AppCompatActivity {
                 }
 
                 readMessages(firebaseUser.getUid(), userid, user.getImageURL());
+
+
+                /*
+                Uri image = Uri.parse(String.valueOf(R.mipmap.ic_launcher));
+                readMessages(firebaseUser.getUid(), "duvivierb", String.valueOf(R.mipmap.ic_launcher));
+
+                 */
+
             }
 
             @Override
@@ -107,13 +136,15 @@ public class MessageActivity extends AppCompatActivity {
                 etMessage.setText("");
             }
         });
+
+
     }
 
-    private void sendMessage(String sender, String receiver, String message) {
+    public void sendMessage(String sender, String receiver, String message) {
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
 
-        HashMap<String,Object> hashMap = new HashMap<>();
-        hashMap.put("sender",sender);
+        HashMap<String, Object> hashMap = new HashMap<>();
+        hashMap.put("sender", sender);
         hashMap.put("receiver", receiver);
         hashMap.put("message", message);
         reference.child("Chats").push().setValue(hashMap);
