@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <item>
-        <shape>
+        <shape android:shape="rectangle">
             <gradient
-                android:startColor="#4b778d"
-                android:endColor="#28b5b5"
-                android:type="linear"
-                >
-
+                android:angle="45"
+                android:startColor="@color/sky_blue"
+                android:centerColor="@color/light_blue"
+                android:endColor="@color/sky_blue"
+                android:type="linear">
             </gradient>
         </shape>
     </item>
