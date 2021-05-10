@@ -12,18 +12,12 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="?attr/colorPrimary"
+        android:background="@color/sky_blue"
         android:minHeight="?attr/actionBarSize"
-        android:theme="?attr/actionBarTheme"
+        android:theme="@style/AppTheme"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
-
-        <TextView
-            android:id="@+id/username"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="TextView"/>
 
         <ImageView
             android:id="@+id/imageviewProfilePicture"
@@ -31,6 +25,14 @@
             android:layout_height="wrap_content"
             app:srcCompat="@mipmap/ic_launcher"
             android:contentDescription="@string/profile_pic" />
+
+        <TextView
+            android:id="@+id/username"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/profile_name"
+            android:text="TextView"/>
+
 
     </androidx.appcompat.widget.Toolbar>
 
