@@ -13,6 +13,5 @@
         android:entries="@array/language_entries"
         android:entryValues="@array/language_values"
         android:title="@string/language_pref"
-        android:background="@drawable/greybg"
         android:summary="@string/lang_pref_summary" />
 </PreferenceScreen>

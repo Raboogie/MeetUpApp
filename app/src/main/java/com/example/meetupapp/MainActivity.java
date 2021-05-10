@@ -96,6 +96,9 @@ public class MainActivity extends AppCompatActivity {
 
         if (lang.equals("es")) {
             config.setLocale(new Locale("es"));
+        }
+        if (lang.equals("ja")) {
+            config.setLocale(new Locale("ja"));
         } else {
             config.setLocale(Locale.ENGLISH);
         }
