@@ -34,5 +34,6 @@
     <string name="confirm_location">Confirmar ubicación</string>
     <string name="select_a_user">Seleccione un usuario</string>
     <string name="who_are_you_meeting">¿Con quién se reunirá?</string>
+    <string name="phone_hint">Introduzca un número de teléfono</string>
 
 </resources>

@@ -38,5 +38,6 @@
     <string name="darkMode_summary">Turn dark mode on or off</string>
     <string name="language_pref">Language</string>
     <string name="lang_pref_summary">Change the app\'s language</string>
+    <string name="phone_hint">Enter a phone number</string>
 
 </resources>

@@ -5,6 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/gradient_register"
     tools:context="com.example.meetupapp.CallActivity">
 
     <EditText
@@ -14,6 +15,7 @@
         android:layout_marginTop="194dp"
         android:layout_marginBottom="492dp"
         android:inputType="phone"
+        android:hint="@string/phone_hint"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
