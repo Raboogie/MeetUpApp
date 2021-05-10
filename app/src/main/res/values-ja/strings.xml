@@ -15,4 +15,23 @@
     <string name="type_a_message">メッセージをタイプしてください</string>
     <string name="profile_pic">profile_pic</string>
 
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="meetup_location_planner">落ち合う　場所のプランナー</string>
+    <string name="use_the_search_button_to_choose_a_location_using_google_maps">探すボタンを使って、グーグルマップと場所を選んでください</string>
+    <string name="set_date">設定日付</string>
+    <string name="set_a_date_to_meet">合う日付を設定してください。。。</string>
+    <string name="type_here">ここに入力してください。。。</string>
+    <string name="type_here_optional">ここに入力してください「オプシュナル」。。。</string>
+    <string name="mm_dd_yyyy">mm/dd/yyyy</string>
+    <string name="location_address">住所</string>
+    <string name="search">探す</string>
+    <string name="set_time">設定時間</string>
+    <string name="custom_message">カスタムメッセージ</string>
+    <string name="confirm_meetup">落ち合うを確認する</string>
+    <string name="search_location">場所を探す。。。</string>
+    <string name="choose_a_location">場所を選ぶ</string>
+    <string name="confirm_location">場所を確認する</string>
+    <string name="select_a_user">ユーザを選ぶ</string>
+    <string name="who_are_you_meeting">誰に合いますか</string>
 </resources>
