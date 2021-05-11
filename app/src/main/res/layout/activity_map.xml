@@ -5,7 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@drawable/gradient_register"
     tools:context=".MapActivity">
 
     <ScrollView
@@ -25,7 +24,7 @@
                 android:layout_margin="10dp"
                 android:text="@string/choose_a_location"
                 android:textColor="#090000"
-                android:textSize="25dp"
+                android:textSize="25sp"
                 android:textStyle="bold" />
 
             <androidx.gridlayout.widget.GridLayout

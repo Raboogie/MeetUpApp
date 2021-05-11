@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
@@ -16,10 +17,13 @@ import android.content.res.Resources;
 import androidx.viewpager.widget.ViewPager;
 
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Trace;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.TableLayout;
 import android.widget.Toast;
 
@@ -46,6 +50,8 @@ public class MainActivity extends AppCompatActivity {
 
     TabLayout tabLayout;
     ViewPager viewPager;
+    View chatView;
+    Drawable bg;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,6 +73,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        chatView = findViewById(R.id.constraintLayout);
         tabLayout = findViewById(R.id.tabLayout);
         viewPager = findViewById(R.id.viewPager);
 
@@ -84,10 +91,12 @@ public class MainActivity extends AppCompatActivity {
         PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
         SharedPreferences sharedP = PreferenceManager.getDefaultSharedPreferences(this);
         SharedPreferences.Editor prefEdit = sharedP.edit();
+        bg = ContextCompat.getDrawable(this, R.drawable.dark);
         Boolean mode = sharedP.getBoolean(SettingsActivity.KEY_DARK_MODE, false);
         if (mode) {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
             prefEdit.putBoolean(SettingsActivity.KEY_DARK_MODE, true);
+            chatView.setBackground(bg);
         } else {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
             prefEdit.putBoolean(SettingsActivity.KEY_DARK_MODE, false);
@@ -98,8 +107,7 @@ public class MainActivity extends AppCompatActivity {
 
         if (lang.equals("es")) {
             config.setLocale(new Locale("es"));
-        }
-        if (lang.equals("ja")) {
+        } else if (lang.equals("ja")) {
             config.setLocale(new Locale("ja"));
         } else {
             config.setLocale(Locale.ENGLISH);

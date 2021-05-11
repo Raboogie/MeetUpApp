@@ -34,4 +34,7 @@
     <string name="confirm_location">場所を確認する</string>
     <string name="select_a_user">ユーザを選ぶ</string>
     <string name="who_are_you_meeting">誰に合いますか</string>
+    <string name="settings_title">セッティング</string>
+    <string name="logout_title">ログアウト</string>
+    <string name="phone_hint">電話番号</string>
 </resources>

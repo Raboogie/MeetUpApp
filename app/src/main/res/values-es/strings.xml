@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Meet Up App</string>
-    <string name="register">Register</string>
+    <string name="app_name">Meet Up Aplicación</string>
+    <string name="register">Registro</string>
     <string name="email">Email</string>
-    <string name="password">Password</string>
-    <string name="username">Username</string>
-    <string name="registration">Registration</string>
+    <string name="password">Contraseña</string>
+    <string name="username">Nombre de usuario</string>
+    <string name="registration">Registro</string>
     <string name="login">LOGIN</string>
     <string name="login_now">LOGIN NOW</string>
-    <string name="register_now">REGISTER NOW</string>
+    <string name="register_now">REGÍSTRAR AHORA</string>
     <string name="users_fragment">Hello Users Fragment</string>
     <string name="chats_fragment">Hello Chats Fragment</string>
-    <string name="type_a_message">Type a Message...</string>
+    <string name="type_a_message">Escriba aquí...</string>
     <string name="profile_pic">profile_pic</string>
     <string name="settings_title">Adjustes</string>
     <string name="logout_title">Salir</string>
@@ -23,7 +23,7 @@
     <string name="meetup_location_planner">Planear tu ubicación</string>
     <string name="set_date">Elija una fecha</string>
     <string name="type_here">Escriba aquí...</string>
-    <string name="type_here_optional">Type here (Opcional)....</string>
+    <string name="type_here_optional">Escriba aquí (Opcional)....</string>
     <string name="location_address">Dirección</string>
     <string name="search">Buscar</string>
     <string name="set_time">Fijar tiempo</string>

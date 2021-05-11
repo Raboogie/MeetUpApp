@@ -2,10 +2,16 @@ package com.example.meetupapp;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
+import androidx.core.content.ContextCompat;
+import androidx.preference.PreferenceManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
@@ -48,6 +54,8 @@ public class MessageActivity extends AppCompatActivity {
     MessageAdapter messageAdapter;
     List<Chat> myChat;
     String location;
+    Drawable bg;
+    View bottom1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +66,8 @@ public class MessageActivity extends AppCompatActivity {
         usernameMessageActivity = findViewById(R.id.username);
         btnSend = findViewById(R.id.btn_send);
         etMessage = findViewById(R.id.EditText_send);
+        bottom1 = findViewById(R.id.bottom);
+
 
         // RecyclerView for messages
         messageRecyclerView = findViewById(R.id.recyclerViewMessage);
@@ -81,6 +91,16 @@ public class MessageActivity extends AppCompatActivity {
         }
 
          */
+        SharedPreferences sharedP = PreferenceManager.getDefaultSharedPreferences(this);
+        bg = ContextCompat.getDrawable(this, R.drawable.dark);
+        Boolean mode = sharedP.getBoolean(SettingsActivity.KEY_DARK_MODE, false);
+        if (mode) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+            messageRecyclerView.setBackground(bg);
+            bottom1.setBackgroundColor(Color.parseColor("#2d3436"));
+        } else {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+        }
 
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
@@ -136,7 +156,6 @@ public class MessageActivity extends AppCompatActivity {
                 etMessage.setText("");
             }
         });
-
 
     }
 
