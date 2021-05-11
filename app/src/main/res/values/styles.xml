@@ -2,7 +2,7 @@
 <resources>
 
     <style name="preferenceTheme" parent="Theme.MeetUpApp">
-        <item name="android:windowBackground">@drawable/settproto</item>
+        <item name="android:windowBackground">@drawable/settingsbg</item>
     </style>
 
 =======

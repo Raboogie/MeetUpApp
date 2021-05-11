@@ -12,9 +12,9 @@
     <string name="users_fragment">Hello Users Fragment</string>
     <string name="chats_fragment">Hello Chats Fragment</string>
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="meetup_location_planner">MeetUp Location Planner</string>
-    <string name="use_the_search_button_to_choose_a_location_using_google_maps" translatable="false">Use the search button to choose a location using google maps</string>
+    <string name="use_the_search_button_to_choose_a_location_using_google_maps">Use the search button to choose a location using google maps</string>
     <string name="set_date">Set Date</string>
     <string name="set_a_date_to_meet">Set a date to meet</string>
     <string name="type_here">Type here...</string>
@@ -39,25 +39,5 @@
     <string name="language_pref">Language</string>
     <string name="lang_pref_summary">Change the app\'s language</string>
     <string name="phone_hint">Enter a phone number</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="meetup_location_planner">MeetUp Location Planner</string>
-    <string name="use_the_search_button_to_choose_a_location_using_google_maps">Use the search button to choose a location using google maps</string>
-    <string name="set_date">Set Date</string>
-    <string name="set_a_date_to_meet">Set a date to meet</string>
-    <string name="type_here">Type here...</string>
-    <string name="type_here_optional">Type here (Optional)....</string>
-    <string name="mm_dd_yyyy">mm/dd/yyyy</string>
-    <string name="location_address">Location Address</string>
-    <string name="search">Search</string>
-    <string name="set_time">Set Time</string>
-    <string name="custom_message">Custom Message</string>
-    <string name="confirm_meetup">Confirm Meetup</string>
-    <string name="search_location">Search Location...</string>
-    <string name="choose_a_location">Choose A Location</string>
-    <string name="confirm_location">Confirm Location</string>
-    <string name="select_a_user">Select A User</string>
-    <string name="who_are_you_meeting">Who Are You Meeting?</string>
 
 </resources>

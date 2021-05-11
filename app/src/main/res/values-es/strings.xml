@@ -35,5 +35,6 @@
     <string name="select_a_user">Seleccione un usuario</string>
     <string name="who_are_you_meeting">¿Con quién se reunirá?</string>
     <string name="phone_hint">Introduzca un número de teléfono</string>
+    <string name="use_the_search_button_to_choose_a_location_using_google_maps">Use el botón de búsqueda para elegir una ubicación usando mapas de Google</string>
 
 </resources>
