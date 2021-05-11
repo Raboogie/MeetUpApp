@@ -4,12 +4,18 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
+import androidx.core.app.NotificationCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.preference.PreferenceManager;
 
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.content.res.Resources;
@@ -107,10 +113,13 @@ public class MainActivity extends AppCompatActivity {
 
         if (lang.equals("es")) {
             config.setLocale(new Locale("es"));
+            sendNotification("Español");
         } else if (lang.equals("ja")) {
             config.setLocale(new Locale("ja"));
+            sendNotification("Japanese");
         } else {
             config.setLocale(Locale.ENGLISH);
+            sendNotification("English");
         }
         this.getResources().updateConfiguration(config, this.getResources().getDisplayMetrics());
         //changeLanguage(this.getResources(), lang);
@@ -138,6 +147,28 @@ public class MainActivity extends AppCompatActivity {
                 return true;
         }
         return false;
+    }
+
+    private void sendNotification(String language) {
+        int NOTIFICATION_ID = 234;
+        NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        String CHANNEL_ID = "channel_01";
+        CharSequence name = "Meet Up App";
+        String Description = "This is my channel";
+        int importance = NotificationManager.IMPORTANCE_DEFAULT;
+        NotificationChannel mChannel = new NotificationChannel(CHANNEL_ID, name, importance);
+        mChannel.setDescription(Description);
+        mChannel.setShowBadge(false);
+        notificationManager.createNotificationChannel(mChannel);
+
+        NotificationCompat.Builder build = new NotificationCompat.Builder(this, CHANNEL_ID)
+                .setSmallIcon(R.mipmap.ic_launcher_round).setContentTitle("Meet Up App")
+                .setContentText("Language has been updated to " + language);
+        Intent notifIntent = new Intent(this, MainActivity.class);
+        PendingIntent contentIntent = PendingIntent.getActivity(this, 0, notifIntent, 0);
+        build.setContentIntent(contentIntent);
+
+        notificationManager.notify(NOTIFICATION_ID, build.build());
     }
 
     // ViewPager Adapter Class
